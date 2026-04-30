@@ -130,6 +130,7 @@ export interface SiteConfig {
   whatsappMessage: string;
   github: string;
   linkedin: string;
+  instagram: string;
   email: string;
   cvPath: string;
   nav: NavItem[];

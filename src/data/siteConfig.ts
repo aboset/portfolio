@@ -12,8 +12,9 @@ export const siteConfig: SiteConfig = {
   whatsapp: '+5541985004244',
   whatsappMessage:
     'Olá Alfredo! Vi seu portfólio e gostaria de conversar sobre um projeto.',
-  github: 'https://github.com/alfredobose',       // ← atualizar link real
-  linkedin: 'https://linkedin.com/in/alfredobose', // ← atualizar link real
+  github: 'https://github.com/aboset',
+  linkedin: 'https://www.linkedin.com/in/abrch/',
+  instagram: 'https://www.instagram.com/abrch_/',
   email: 'hola@alfredobose.com',
   cvPath: '/cv/CV_Alfredo_Rodriguez.pdf',
   nav: [

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, MessageCircle, ArrowDown, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, MessageCircle, ArrowDown, Download, Instagram } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
 import Button from '@/components/ui/Button';
 
@@ -16,6 +16,7 @@ const FADE_UP = {
 const SOCIAL = [
   { icon: Github,        href: siteConfig.github,            label: 'GitHub'   },
   { icon: Linkedin,      href: siteConfig.linkedin,          label: 'LinkedIn' },
+  { icon: Instagram,     href: siteConfig.instagram,         label: 'Instagram'},
   { icon: Mail,          href: `mailto:${siteConfig.email}`, label: 'Email'    },
   { icon: MessageCircle, href: getWhatsAppUrl(siteConfig),   label: 'WhatsApp' },
 ];

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, MessageCircle, Mail } from 'lucide-react';
+import { Github, Linkedin, MessageCircle, Mail, Instagram } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
 import logo from '@/assets/logo.png';
 
 const SOCIAL_LINKS = [
   { icon: Github,        href: siteConfig.github,                label: 'GitHub'    },
   { icon: Linkedin,      href: siteConfig.linkedin,              label: 'LinkedIn'  },
+  { icon: Instagram,     href: siteConfig.instagram,             label: 'Instagram' },
   { icon: MessageCircle, href: getWhatsAppUrl(siteConfig),       label: 'WhatsApp'  },
   { icon: Mail,          href: `mailto:${siteConfig.email}`,     label: 'Email'     },
 ];
