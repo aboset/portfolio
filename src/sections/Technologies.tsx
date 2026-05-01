@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code2 } from 'lucide-react';
-import { technologies, techCategoryLabels, categoryOrder } from '@/data/technologies';
+import { technologies, categoryOrder } from '@/data/technologies';
 import SectionTitle from '@/components/ui/SectionTitle';
 import type { TechCategory } from '@/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ── Accent color per category (left border) ────────────────────
 const CATEGORY_ACCENT: Record<TechCategory, string> = {
@@ -82,6 +83,7 @@ function CategoryCard({
   category: TechCategory;
   index: number;
 }) {
+  const { t } = useLanguage();
   const items = technologies.filter((t) => t.category === category);
   if (items.length === 0) return null;
 
@@ -103,7 +105,7 @@ function CategoryCard({
           style={{ background: iconColor }}
         />
         <h3 className="text-white/90 text-sm font-semibold tracking-wide">
-          {techCategoryLabels[category]}
+          {t(`tech.cat.${category}` as any)}
         </h3>
         <span className="ml-auto text-white/20 text-xs">{items.length}</span>
       </div>
@@ -125,6 +127,8 @@ function CategoryCard({
 
 // ── Main section ────────────────────────────────────────────────
 export default function Technologies() {
+  const { t } = useLanguage();
+
   return (
     <section id="tecnologias" className="py-20 sm:py-28">
       <div className="section-container">
@@ -137,8 +141,8 @@ export default function Technologies() {
           className="mb-10 sm:mb-12"
         >
           <SectionTitle
-            title="Tecnologias"
-            subtitle="Ferramentas e tecnologias que uso no dia a dia para entregar soluções completas"
+            title={t('tech.title')}
+            subtitle={t('tech.subtitle')}
           />
         </motion.div>
 

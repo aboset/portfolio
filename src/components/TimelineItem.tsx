@@ -1,5 +1,6 @@
 import type { Experience, ExperienceType } from '@/types';
 import TechTag from '@/components/ui/TechTag';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const TYPE_COLORS: Record<ExperienceType, string> = {
   Freelance:  'bg-violet-500/10 text-violet-300 border border-violet-500/20',
@@ -14,6 +15,8 @@ interface TimelineItemProps {
 }
 
 export default function TimelineItem({ experience, isLast }: TimelineItemProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="relative pl-10 sm:pl-14">
       {/* Vertical line */}
@@ -53,7 +56,7 @@ export default function TimelineItem({ experience, isLast }: TimelineItemProps) 
             {experience.current && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse-slow" />
-                Atual
+                {t('exp.current')}
               </span>
             )}
             <span className="text-white/40 text-xs font-medium">{experience.period}</span>

@@ -20,10 +20,10 @@ export type TechCategory =
   | 'devops';
 
 /** Language proficiency levels */
-export type LanguageLevel = 'Nativo' | 'Avançado' | 'Intermediário' | 'Básico';
+export type LanguageLevel = string;
 
 /** Work type */
-export type ExperienceType = 'Remoto' | 'Presencial' | 'Híbrido' | 'Freelance';
+export type ExperienceType = string;
 
 // =====================================================
 // Project

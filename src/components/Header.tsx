@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, Download } from 'lucide-react';
 import { useScrolled } from '@/hooks/useScrolled';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { siteConfig } from '@/data/siteConfig';
 import Button from '@/components/ui/Button';
 import MobileMenu from './MobileMenu';
@@ -44,7 +45,8 @@ function LangSelector({
 export default function Header() {
   const scrolled = useScrolled(30);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeLang, setActiveLang] = useState<Lang>('PT');
+  
+  const { language: activeLang, setLanguage: handleLangChange, t } = useLanguage();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -109,7 +111,7 @@ export default function Header() {
                   onClick={(e) => handleNavClick(e, item.href)}
                   className="text-sm font-medium text-white/60 hover:text-white transition-colors duration-200 relative group"
                 >
-                  {item.label}
+                  {t(item.label as any)}
                   <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-brand-purple group-hover:w-full transition-all duration-300" />
                 </a>
               ))}
@@ -117,7 +119,7 @@ export default function Header() {
 
             {/* ── Desktop Right: Lang selector + CV button ── */}
             <div className="hidden lg:flex items-center gap-4">
-              <LangSelector active={activeLang} onChange={setActiveLang} />
+              <LangSelector active={activeLang} onChange={handleLangChange} />
               <Button
                 href={siteConfig.cvPath}
                 download
@@ -125,14 +127,14 @@ export default function Header() {
                 size="sm"
                 icon={<Download size={14} />}
               >
-                Baixar CV
+                {t('hero.btn.cv')}
               </Button>
             </div>
 
             {/* ── Mobile: lang selector + hamburger ── */}
             <div className="flex lg:hidden items-center gap-2">
               {/* Language selector visible in mobile header */}
-              <LangSelector active={activeLang} onChange={setActiveLang} />
+              <LangSelector active={activeLang} onChange={handleLangChange} />
               <button
                 className="p-2 text-white/60 hover:text-white transition-colors"
                 onClick={() => setMobileOpen(true)}

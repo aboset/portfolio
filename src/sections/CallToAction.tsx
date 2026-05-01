@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CallToAction() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 sm:py-28 relative overflow-hidden">
       {/* Subtle dot grid */}
@@ -24,17 +27,16 @@ export default function CallToAction() {
             transition={{ delay: 0.15 }}
             className="text-brand-purple-light/70 text-sm font-semibold uppercase tracking-widest mb-4"
           >
-            Vamos trabalhar juntos
+            {t('cta.label')}
           </motion.p>
 
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight">
-            Vamos conversar sobre{' '}
-            <span className="gradient-text">seu projeto?</span>
-          </h2>
+          <h2 
+            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight"
+            dangerouslySetInnerHTML={{ __html: t('cta.title') }}
+          />
 
           <p className="text-white/55 text-base sm:text-lg leading-relaxed mb-10">
-            Seja para uma vaga CLT/PJ ou um projeto freelance, estou disponível
-            para uma conversa sem compromisso.
+            {t('cta.subtitle')}
           </p>
 
           {/* WhatsApp CTA */}
@@ -47,11 +49,11 @@ export default function CallToAction() {
             className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-emerald-500 text-white font-semibold text-base hover:bg-emerald-600 shadow-[0_0_40px_rgba(52,211,153,0.3)] hover:shadow-[0_0_50px_rgba(52,211,153,0.45)] transition-all duration-300"
           >
             <MessageCircle size={20} />
-            Falar no WhatsApp
+            {t('cta.btn.whatsapp')}
           </motion.a>
 
           <p className="mt-5 text-white/30 text-sm">
-            ou envie um email para{' '}
+            {t('cta.btn.email')}{' '}
             <a
               href={`mailto:${siteConfig.email}`}
               className="text-brand-purple-light/70 hover:text-brand-purple-light transition-colors underline underline-offset-2"

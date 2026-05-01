@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin, MessageCircle, Mail, Instagram } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
 import logo from '@/assets/logo.png';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const SOCIAL_LINKS = [
   { icon: Github,        href: siteConfig.github,                label: 'GitHub'    },
@@ -13,6 +14,7 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="border-t border-surface-border bg-surface-base">
@@ -49,7 +51,7 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-white/25 text-xs">
-              © {year} {siteConfig.name}. Todos os direitos reservados.
+              © {year} {siteConfig.name}. {t('footer.rights')}
             </p>
           </div>
         </div>

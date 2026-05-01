@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion';
 import { GraduationCap, Languages } from 'lucide-react';
-import { educations, languages } from '@/data/education';
+import { useEducations, useLanguagesData } from '@/data/education';
+import { useLanguage } from '@/contexts/LanguageContext';
 import SectionTitle from '@/components/ui/SectionTitle';
 
 export default function Education() {
+  const educations = useEducations();
+  const languages = useLanguagesData();
+  const { t } = useLanguage();
+
   return (
     <section id="formacao" className="py-20 sm:py-28">
       <div className="section-container">
@@ -15,8 +20,8 @@ export default function Education() {
           className="mb-10 sm:mb-14"
         >
           <SectionTitle
-            title="Formação & Idiomas"
-            subtitle="Educação formal e capacidades de comunicação"
+            title={t('edu.title')}
+            subtitle={t('edu.subtitle')}
           />
         </motion.div>
 

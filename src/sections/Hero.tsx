@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, MessageCircle, ArrowDown, Download, Instagram } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
 import Button from '@/components/ui/Button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const FADE_UP = {
   hidden: { opacity: 0, y: 30 },
@@ -21,11 +22,10 @@ const SOCIAL = [
   { icon: MessageCircle, href: getWhatsAppUrl(siteConfig),   label: 'WhatsApp' },
 ];
 
-const ROLES = ['WordPress', 'React', 'Automatizações'];
-
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { t } = useLanguage();
 
   // Track mouse within the section for the glow effect
   useEffect(() => {
@@ -70,13 +70,13 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-card border border-brand-purple/20 text-sm text-white/65 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-slow" />
-          Disponível para novos projetos
+          {t('hero.available')}
         </motion.div>
 
         {/* Name */}
         <motion.div variants={FADE_UP} initial="hidden" animate="visible" custom={0.1}>
           <p className="text-brand-purple-light font-medium text-base sm:text-lg mb-2 tracking-wide">
-            Olá, sou
+            {t('hero.greeting')}
           </p>
           <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-5 leading-[1.05]">
             Alfredo{' '}
@@ -92,11 +92,11 @@ export default function Hero() {
           custom={0.2}
           className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 mb-6"
         >
-          {ROLES.map((role, i) => (
+          {[t('hero.roles.wp'), t('hero.roles.react'), t('hero.roles.auto')].map((role, i) => (
             <span key={role} className="flex items-center gap-2 text-white/55 font-medium text-sm sm:text-base">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-purple" />
               {role}
-              {i < ROLES.length - 1 && (
+              {i < 2 && (
                 <span className="text-white/20 ml-2 hidden sm:inline">|</span>
               )}
             </span>
@@ -111,7 +111,7 @@ export default function Hero() {
           custom={0.3}
           className="max-w-lg mx-auto text-white/55 text-base sm:text-lg leading-relaxed mb-10"
         >
-          {siteConfig.description}
+          {t('hero.desc')}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -123,7 +123,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <Button href="/projetos" size="lg">
-            Ver Projetos
+            {t('hero.btn.projects')}
           </Button>
           <Button
             href={siteConfig.cvPath}
@@ -132,7 +132,7 @@ export default function Hero() {
             size="lg"
             icon={<Download size={16} />}
           >
-            Baixar CV
+            {t('hero.btn.cv')}
           </Button>
         </motion.div>
 
@@ -166,7 +166,7 @@ export default function Hero() {
         transition={{ delay: 1.5, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25"
       >
-        <span className="text-xs tracking-widest uppercase">Scroll</span>
+        <span className="text-xs tracking-widest uppercase">{t('hero.scroll')}</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}

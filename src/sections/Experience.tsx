@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion';
-import { experiences } from '@/data/experience';
+import { useExperiences } from '@/data/experience';
+import { useLanguage } from '@/contexts/LanguageContext';
 import TimelineItem from '@/components/TimelineItem';
 import SectionTitle from '@/components/ui/SectionTitle';
 
 export default function Experience() {
+  const experiences = useExperiences();
+  const { t } = useLanguage();
+
   return (
     <section id="experiencia" className="py-20 sm:py-28">
       <div className="section-container">
@@ -15,8 +19,8 @@ export default function Experience() {
           className="mb-10 sm:mb-14"
         >
           <SectionTitle
-            title="Experiência"
-            subtitle="Trajetória profissional em desenvolvimento web e soluções digitais"
+            title={t('exp.title')}
+            subtitle={t('exp.subtitle')}
           />
         </motion.div>
 

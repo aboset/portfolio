@@ -5,6 +5,7 @@ import { X, ExternalLink, Github } from 'lucide-react';
 import type { Project } from '@/types';
 import TechTag from '@/components/ui/TechTag';
 import Button from '@/components/ui/Button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -23,6 +24,8 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
 };
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const { t } = useLanguage();
+
   // Handle keyboard + body scroll
   useEffect(() => {
     if (!project) return;
@@ -109,7 +112,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.highlights && project.highlights.length > 0 && (
                 <div className="mb-6">
                   <p className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-3">
-                    Destaques
+                    {t('proj.modal.highlights')}
                   </p>
                   <ul className="space-y-2">
                     {project.highlights.map((h) => (
@@ -128,7 +131,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Stack */}
               <div className="mb-6">
                 <p className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-3">
-                  Tecnologias
+                  {t('proj.modal.tech')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((tech) => (

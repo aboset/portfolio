@@ -3,6 +3,7 @@ import { Eye } from 'lucide-react';
 import type { Project, ProjectCategory } from '@/types';
 import TechTag from '@/components/ui/TechTag';
 import Badge from '@/components/ui/Badge';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProjectCardProps {
   project: Project;
@@ -28,6 +29,8 @@ const CATEGORY_GRADIENTS: Record<ProjectCategory, string> = {
 };
 
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
+  const { t } = useLanguage();
+
   return (
     <motion.article
       layout
@@ -67,7 +70,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         <div className="absolute inset-0 bg-brand-purple/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white text-sm font-medium">
             <Eye size={14} />
-            Ver detalhes
+            {t('proj.btn.details')}
           </div>
         </div>
 

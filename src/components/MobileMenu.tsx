@@ -3,6 +3,7 @@ import { X, Download, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig, getWhatsAppUrl } from '@/data/siteConfig';
 import logo from '@/assets/logo.png';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -11,6 +12,8 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose, onNavClick }: MobileMenuProps) {
+  const { t } = useLanguage();
+
   // Lock body scroll while menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -65,7 +68,7 @@ export default function MobileMenu({ isOpen, onClose, onNavClick }: MobileMenuPr
                   onClick={() => onNavClick(item.href)}
                   className="w-full text-left px-4 py-3.5 text-base font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200"
                 >
-                  {item.label}
+                  {t(item.label as any)}
                 </motion.button>
               ))}
             </nav>
@@ -78,7 +81,7 @@ export default function MobileMenu({ isOpen, onClose, onNavClick }: MobileMenuPr
                 className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-brand-purple text-white text-sm font-medium hover:bg-brand-purple-dark transition-all duration-200 shadow-[0_0_20px_rgba(120,62,244,0.3)]"
               >
                 <Download size={16} />
-                Baixar CV
+                {t('hero.btn.cv')}
               </a>
               <a
                 href={getWhatsAppUrl(siteConfig)}

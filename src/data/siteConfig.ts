@@ -18,11 +18,11 @@ export const siteConfig: SiteConfig = {
   email: 'hola@alfredobose.com',
   cvPath: '/cv/CV_Alfredo_Rodriguez.pdf',
   nav: [
-    { label: 'Projetos',    href: '/projetos'      },
-    { label: 'Sobre',       href: '/#sobre'        },
-    { label: 'Experiência', href: '/#experiencia'  },
-    { label: 'Tecnologias', href: '/#tecnologias'  },
-    { label: 'Formação',    href: '/#formacao'     },
+    { label: 'nav.projects',   href: '/projetos'      },
+    { label: 'nav.about',      href: '/#sobre'        },
+    { label: 'nav.experience', href: '/#experiencia'  },
+    { label: 'nav.tech',       href: '/#tecnologias'  },
+    { label: 'nav.education',  href: '/#formacao'     },
   ] satisfies NavItem[],
 };
 

@@ -1,18 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { projects, getProjectsByCategory } from '@/data/projects';
+import { useProjects, useProjectsByCategory } from '@/data/projects';
+import { useLanguage } from '@/contexts/LanguageContext';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectModal from '@/components/ProjectModal';
 import Footer from '@/components/Footer';
 import type { Project, ProjectFilter } from '@/types';
-
-const FILTERS: { label: string; value: ProjectFilter }[] = [
-  { label: 'Todos',            value: 'all'        },
-  { label: 'WordPress',        value: 'wordpress'  },
-  { label: 'React',            value: 'react'      },
-  { label: 'CRM / Dashboards', value: 'crm'        },
-  { label: 'Automatizações',   value: 'automacoes' },
-];
 
 const ITEMS_PER_LOAD = 6;
 const LOAD_MORE_STEP  = 3;
@@ -22,8 +15,18 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [visibleCount, setVisibleCount]       = useState(ITEMS_PER_LOAD);
   const sentinelRef                           = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
-  const filtered = getProjectsByCategory(activeFilter);
+  const FILTERS: { label: string; value: ProjectFilter }[] = [
+    { label: t('nav.projects').startsWith('Pro') ? 'Todos' : 'All', value: 'all' },
+    { label: 'WordPress',        value: 'wordpress'  },
+    { label: 'React',            value: 'react'      },
+    { label: 'CRM / Dashboards', value: 'crm'        },
+    { label: t('hero.roles.auto'), value: 'automacoes' },
+  ];
+
+  const filtered = useProjectsByCategory(activeFilter);
+  const allProjects = useProjects();
   const visible  = filtered.slice(0, visibleCount);
   const hasMore  = visibleCount < filtered.length;
 
@@ -71,14 +74,13 @@ export default function Projects() {
               transition={{ duration: 0.6 }}
             >
               <p className="text-brand-purple-light/70 text-sm font-semibold uppercase tracking-widest mb-3">
-                Portfólio completo
+                {t('nav.projects')}
               </p>
               <h1 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-3">
-                Projetos
+                {t('nav.projects')}
               </h1>
               <p className="text-white/50 text-base max-w-xl leading-relaxed">
-                {projects.length} projetos em WordPress, React, CRM e Automatizações.
-                Filtre por categoria ou explore todos.
+                {allProjects.length} {t('nav.projects').toLowerCase()} em WordPress, React, CRM e Automatizações.
               </p>
             </motion.div>
           </div>
@@ -111,10 +113,14 @@ export default function Projects() {
           </motion.div>
 
           {/* ── Results count ── */}
-          <p className="text-white/30 text-xs mb-6">
-            Mostrando <span className="text-white/60">{visible.length}</span> de{' '}
-            <span className="text-white/60">{filtered.length}</span> projetos
-          </p>
+          <p 
+            className="text-white/30 text-xs mb-6"
+            dangerouslySetInnerHTML={{
+              __html: t('proj.results')
+                .replace('{visible}', visible.length.toString())
+                .replace('{total}', filtered.length.toString())
+            }}
+          />
 
           {/* ── Grid ── */}
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -146,7 +152,7 @@ export default function Projects() {
 
           {!hasMore && visible.length > 0 && (
             <p className="text-center text-white/25 text-sm mt-10">
-              Todos os {filtered.length} projetos exibidos
+              {t('proj.all_shown').replace('{total}', filtered.length.toString())}
             </p>
           )}
         </div>

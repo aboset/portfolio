@@ -1,17 +1,27 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import SectionTitle from '@/components/ui/SectionTitle';
-
-const STRENGTHS = [
-  'Construção de soluções digitais do início à entrega',
-  'Automações que eliminam processos manuais e geram escala',
-  'WordPress avançado: temas, plugins, WooCommerce e SEO',
-  'Desenvolvimento de landing pages e CRMs em React',
-  'Integração de sistemas via API e scripts Python',
-  'Disponível para CLT, PJ e projetos freelance',
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
+
+  const STRENGTHS = [
+    t('about.strengths.1'),
+    t('about.strengths.2'),
+    t('about.strengths.3'),
+    t('about.strengths.4'),
+    t('about.strengths.5'),
+    t('about.strengths.6'),
+  ];
+
+  const BADGES = [
+    { label: t('about.badges.loc'), value: t('about.badges.loc.val') },
+    { label: t('about.badges.disp'), value: t('about.badges.disp.val') },
+    { label: t('about.badges.mod'), value: t('about.badges.mod.val') },
+    { label: t('about.badges.lang'), value: t('about.badges.lang.val') },
+  ];
+
   return (
     <section id="sobre" className="py-20 sm:py-28">
       <div className="section-container">
@@ -24,36 +34,15 @@ export default function About() {
             transition={{ duration: 0.7 }}
           >
             <SectionTitle
-              title="Sobre Mim"
-              subtitle="Construo soluções digitais que funcionam, escalam e entregam resultado real."
+              title={t('about.title')}
+              subtitle={t('about.subtitle')}
             />
 
             <div className="mt-6 space-y-4 text-white/60 text-base leading-relaxed">
-              <p>
-                Desenvolvedor web com experiência na construção de{' '}
-                <strong className="text-white/80">soluções digitais completas</strong> — desde
-                sites institucionais e landing pages até sistemas internos, CRMs e automações
-                que eliminam processos manuais e geram resultado real para empresas e clientes.
-              </p>
-              <p>
-                Trabalho com <strong className="text-white/80">WordPress avançado</strong>,
-                desenvolvimento de interfaces em{' '}
-                <strong className="text-white/80">React e TypeScript</strong>, e back-end com{' '}
-                <strong className="text-white/80">PHP e Python</strong>. Integro sistemas via
-                API, automatizo fluxos com scripts e ferramentas como n8n e Make, e aplico
-                inteligência artificial para otimizar processos.
-              </p>
-              <p>
-                Tenho sólida atuação em SEO técnico, hospedagem, DNS, cPanel e
-                gerenciamento de infraestrutura. Cada entrega passa por validação funcional
-                completa — garantindo estabilidade, performance e compatibilidade antes de
-                ir ao ar.
-              </p>
-              <p>
-                Disponível para oportunidades como{' '}
-                <strong className="text-white/80">desenvolvedor front-end, full-stack</strong>{' '}
-                ou para projetos freelance em WordPress, React e automações.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: t('about.p1') }} />
+              <p dangerouslySetInnerHTML={{ __html: t('about.p2') }} />
+              <p dangerouslySetInnerHTML={{ __html: t('about.p3') }} />
+              <p dangerouslySetInnerHTML={{ __html: t('about.p4') }} />
             </div>
           </motion.div>
 
@@ -68,12 +57,12 @@ export default function About() {
             {/* Card header */}
             <div className="p-5 sm:p-6 rounded-2xl bg-surface-card border border-surface-border">
               <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
-                Diferenciais
+                {t('about.strengths.title')}
               </p>
               <ul className="space-y-3">
                 {STRENGTHS.map((s, i) => (
                   <motion.li
-                    key={s}
+                    key={i}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -92,12 +81,7 @@ export default function About() {
 
             {/* Quick-info badges */}
             <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: 'Localização',    value: 'Curitiba, PR'        },
-                { label: 'Disponibilidade', value: 'Imediata'            },
-                { label: 'Modalidade',     value: 'CLT / PJ / Freelance' },
-                { label: 'Idiomas',        value: 'ES · PT · EN'         },
-              ].map(({ label, value }) => (
+              {BADGES.map(({ label, value }) => (
                 <div
                   key={label}
                   className="p-3.5 rounded-xl bg-surface-card border border-surface-border"

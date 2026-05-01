@@ -2,13 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useInView, animate, useMotionValue, useTransform, motion } from 'framer-motion';
 import { parseMetricValue } from '@/lib/utils';
 import type { Metric } from '@/types';
-
-const metrics: Metric[] = [
-  { value: '3+',  label: 'Anos de Experiência',   description: 'Desenvolvendo soluções digitais'        },
-  { value: '50+', label: 'Projetos WordPress',     description: 'Sites e e-commerces entregues'          },
-  { value: '25+', label: 'Projetos React',         description: 'Aplicações modernas desenvolvidas'      },
-  { value: '3',   label: 'Dashboards / CRMs',      description: 'Sistemas internos customizados'         },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 function AnimatedCounter({ value }: { value: string }) {
   const { num, suffix } = parseMetricValue(value);
@@ -31,13 +25,22 @@ function AnimatedCounter({ value }: { value: string }) {
 }
 
 export default function Metrics() {
+  const { t } = useLanguage();
+
+  const metrics: Metric[] = [
+    { value: '3+',  label: t('metrics.1.label'),   description: t('metrics.1.desc') },
+    { value: '50+', label: t('metrics.2.label'),   description: t('metrics.2.desc') },
+    { value: '25+', label: t('metrics.3.label'),   description: t('metrics.3.desc') },
+    { value: '3',   label: t('metrics.4.label'),   description: t('metrics.4.desc') },
+  ];
+
   return (
     <section className="py-16 sm:py-20">
       <div className="section-container">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {metrics.map((metric, i) => (
             <motion.div
-              key={metric.label}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
